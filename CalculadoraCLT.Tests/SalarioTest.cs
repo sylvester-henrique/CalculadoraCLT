@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculadoraCLT.Tests.TestData;
+using System;
 using Xunit;
 
 namespace CalculadoraCLT.Tests
@@ -8,12 +9,7 @@ namespace CalculadoraCLT.Tests
         private readonly Salario _salario = new Salario();
 
         [Theory]
-        [InlineData(800, 740)]
-        [InlineData(1150, 1063)]
-        [InlineData(2350, 2132.11)]
-        [InlineData(3645.23, 3145.87)]
-        [InlineData(4333.12, 3639.4)]
-        [InlineData(7756.99, 5947.98)]
+        [MemberData(nameof(SalarioTestData.Salario_Deve_Calcular_Salario_Liquido), MemberType = typeof(SalarioTestData))]
         public void Salario_Deve_Calcular_Salario_Liquido(double salarioBruto, double salarioLiquidoEsperado)
         {
             var salarioLiquidoCalculado = _salario.SalarioLiquido(salarioBruto);
@@ -29,11 +25,8 @@ namespace CalculadoraCLT.Tests
         }
 
         [Theory]
-        [InlineData(700, 7.5)]
-        [InlineData(1345.89, 7.77)]
-        [InlineData(2999.99, 11.29)]
-        [InlineData(5468, 19.78)]
-        [InlineData(9999, 24.26)]
+        [MemberData(nameof(SalarioTestData.Salario_Deve_Calcular_Taxa_Descontos), MemberType = typeof(SalarioTestData))]
+
         public void Salario_Deve_Calcular_Taxa_Descontos(double salarioBruto, double taxaDescontosEsperada)
         {
             var taxaDescontosCalculada = _salario.TaxaDescontos(salarioBruto);
@@ -49,10 +42,7 @@ namespace CalculadoraCLT.Tests
         }
 
         [Theory]
-        [InlineData(980, 73.5)]
-        [InlineData(1430, 112.2)]
-        [InlineData(2777.98, 297.5)]
-        [InlineData(3150, 368.79)]
+        [MemberData(nameof(SalarioTestData.Salario_Deve_Calcular_Total_Descontos), MemberType = typeof(SalarioTestData))]
         public void Salario_Deve_Calcular_Total_Descontos(double salarioBruto, double totalDescontosEsperado)
         {
             var totalDescontosCalculado = _salario.TotalDescontos(salarioBruto);

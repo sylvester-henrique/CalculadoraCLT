@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculadoraCLT.Tests.TestData;
+using System;
 using Xunit;
 
 namespace CalculadoraCLT.Tests
@@ -8,11 +9,7 @@ namespace CalculadoraCLT.Tests
         private readonly IRRF _irrf = new IRRF();
 
         [Theory]
-        [InlineData(900, 0)]
-        [InlineData(2500, 28.40)]
-        [InlineData(3500, 119.01)]
-        [InlineData(4300, 229.38)]
-        [InlineData(5500, 472.28)]
+        [MemberData(nameof(IRRFTestData.IRRF_Deve_Calcular), MemberType = typeof(IRRFTestData))]
         public void IRRF_Deve_Calcular(double salarioBruto, double irrfEsperado)
         {
             var irrfCalculado = _irrf.Calcular(salarioBruto);

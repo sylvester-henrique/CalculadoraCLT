@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculadoraCLT.Tests.TestData;
+using System;
 using Xunit;
 
 namespace CalculadoraCLT.Tests
@@ -8,11 +9,7 @@ namespace CalculadoraCLT.Tests
         private readonly INSS _inss = new INSS();
 
         [Theory]
-        [InlineData(1000, 75)]
-        [InlineData(1200, 91.50)]
-        [InlineData(3000, 277.40)]
-        [InlineData(4000, 411.29)]
-        [InlineData(6500, 751.99)]
+        [MemberData(nameof(INSSTestData.INSS_Deve_Calcular), MemberType = typeof(INSSTestData))]
         public void INSS_Deve_Calcular(double salarioBruto, double inssEsperado)
         {
             var inssCalculado = _inss.Calcular(salarioBruto);
