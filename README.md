@@ -8,6 +8,10 @@ A biblioteca atualmente possui as funcionalidades:
   - salário líquido
   - porcentagem do total de descontos
   - valor total de descontos
+- Cálculos de FGTS
+  - cálculo de FGTS a partir do salário bruto 
+  - cálculo do valor do saque aniversário a partir do saldo do FGTS
+  - cálculo de previsões dos próximos saques aniversário do FGTS
   
   
  # Inspiração
