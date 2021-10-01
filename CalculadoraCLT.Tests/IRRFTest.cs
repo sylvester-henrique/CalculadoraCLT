@@ -21,7 +21,7 @@ namespace CalculadoraCLT.Tests
         [InlineData(-5000)]
         public void IRRF_Calcular_Deve_Lancar_ArgumentException_Salario_Bruto_Menor_Igual_Zero(double salarioBruto)
         {
-            Assert.Throws<ArgumentException>(() => _irrf.Calcular(salarioBruto));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _irrf.Calcular(salarioBruto));
         }
     }
 }

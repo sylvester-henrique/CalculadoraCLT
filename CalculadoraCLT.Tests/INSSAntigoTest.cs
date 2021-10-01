@@ -19,9 +19,9 @@ namespace CalculadoraCLT.Tests
         [Theory]
         [InlineData(0)]
         [InlineData(-5)]
-        public void INSSAntigo_Calcular_Deve_Lancar_ArgumentException_Salario_Bruto_Menor_Igual_Zero(double salarioBruto)
+        public void INSSAntigo_Calcular_Deve_Lancar_ArgumentOutOfRangeException(double salarioBruto)
         {
-            Assert.Throws<ArgumentException>(() => _inssAntigo.Calcular(salarioBruto));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _inssAntigo.Calcular(salarioBruto));
         }
     }
 }

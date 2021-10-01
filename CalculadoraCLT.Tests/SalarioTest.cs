@@ -19,9 +19,9 @@ namespace CalculadoraCLT.Tests
         [Theory]
         [InlineData(0)]
         [InlineData(-6345.21)]
-        public void Salario_Salario_Liquido_Deve_Lancar_ArgumentException_Salario_Bruto_Menor_Igual_Zero(double salarioBruto)
+        public void Salario_Liquido_Deve_Lancar_ArgumentOutOfRangeException(double salarioBruto)
         {
-            Assert.Throws<ArgumentException>(() => _salario.SalarioLiquido(salarioBruto));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _salario.SalarioLiquido(salarioBruto));
         }
 
         [Theory]
@@ -36,9 +36,9 @@ namespace CalculadoraCLT.Tests
         [Theory]
         [InlineData(0)]
         [InlineData(-6)]
-        public void Salario_Taxa_Descontos_Deve_Lancar_ArgumentException_Salario_Bruto_Menor_Igual_Zero(double salarioBruto)
+        public void Taxa_Descontos_Deve_Lancar_ArgumentOutOfRangeException(double salarioBruto)
         {
-            Assert.Throws<ArgumentException>(() => _salario.TaxaDescontos(salarioBruto));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _salario.TaxaDescontos(salarioBruto));
         }
 
         [Theory]
@@ -52,9 +52,9 @@ namespace CalculadoraCLT.Tests
         [Theory]
         [InlineData(0)]
         [InlineData(-789)]
-        public void Salario_Total_Descontos_Deve_Lancar_ArgumentException_Salario_Bruto_Menor_Igual_Zero(double salarioBruto)
+        public void Total_Descontos_Deve_Lancar_ArgumentOutOfRangeException(double salarioBruto)
         {
-            Assert.Throws<ArgumentException>(() => _salario.TotalDescontos(salarioBruto));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _salario.TotalDescontos(salarioBruto));
         }
     }
 }

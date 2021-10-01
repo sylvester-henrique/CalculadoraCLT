@@ -22,7 +22,7 @@ namespace CalculadoraCLT
         public double SalarioLiquido(double salarioBruto)
         {
             if (salarioBruto <= 0)
-                throw new ArgumentException($"{nameof(salarioBruto)} não pode ser menor ou igual a zero!");
+                throw new ArgumentOutOfRangeException(nameof(salarioBruto), salarioBruto, "O valor especificado não pode ser menor ou igual a zero.");
 
             return salarioBruto - _inss.Calcular(salarioBruto) - _irrf.Calcular(salarioBruto);
         }
@@ -30,7 +30,7 @@ namespace CalculadoraCLT
         public double TaxaDescontos(double salarioBruto)
         {
             if (salarioBruto <= 0)
-                throw new ArgumentException($"{nameof(salarioBruto)} não pode ser menor ou igual a zero!");
+                throw new ArgumentOutOfRangeException(nameof(salarioBruto), salarioBruto, "O valor especificado não pode ser menor ou igual a zero.");
 
             var salarioLiquido = SalarioLiquido(salarioBruto);
             return (1 - (salarioLiquido / salarioBruto)) * 100;
@@ -39,7 +39,7 @@ namespace CalculadoraCLT
         public double TotalDescontos(double salarioBruto)
         {
             if (salarioBruto <= 0)
-                throw new ArgumentException($"{nameof(salarioBruto)} não pode ser menor ou igual a zero!");
+                throw new ArgumentOutOfRangeException(nameof(salarioBruto), salarioBruto, "O valor especificado não pode ser menor ou igual a zero.");
 
             var salarioLiquido = SalarioLiquido(salarioBruto);
             return salarioBruto - salarioLiquido;

@@ -25,7 +25,7 @@ namespace CalculadoraCLT
         public double Calcular(double salarioBruto)
         {
             if (salarioBruto <= 0)
-                throw new ArgumentException($"{nameof(salarioBruto)} não pode ser menor ou igual a zero!");
+                throw new ArgumentOutOfRangeException(nameof(salarioBruto), salarioBruto, "O valor especificado não pode ser menor ou igual a zero.");
 
             var baseCalculo = salarioBruto - _inss.Calcular(salarioBruto);
             if (baseCalculo <= _faixaSalarial1.LimiteSuperior)
