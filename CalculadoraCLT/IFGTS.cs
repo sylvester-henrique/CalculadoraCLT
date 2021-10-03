@@ -2,7 +2,7 @@
 
 namespace CalculadoraCLT
 {
-    interface IFGTS
+    public interface IFGTS
     {
         double Calcular(double salario);
         double SaqueAniversario(double saldoFgts);
