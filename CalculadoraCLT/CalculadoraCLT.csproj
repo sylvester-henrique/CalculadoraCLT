@@ -2,6 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Sylvester Henrique</Authors>
+    <Description>Contém funcionalidades de cálculos relacionados à CLT(Consolidação de Leis de Trabalho) brasileira.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/SylvesterH13/CalculadoraCLT</RepositoryUrl>
+    <PackageTags>Calculadora CLT, CLT, Consolidação de Leis de Trabalho</PackageTags>
+    <Company />
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGet.CommandLine" Version="5.11.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>
