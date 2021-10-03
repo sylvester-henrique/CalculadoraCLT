@@ -8,7 +8,8 @@ namespace CalculadoraCLT
     public class FGTS : IFGTS
     {
         private const double TaxaFgts = 0.08;
-        private static readonly FaixaSaqueFGTS[] FaixasSaque = new FaixaSaqueFGTS[]
+
+        private readonly FaixaSaqueFGTS[] _faixasSaque = new FaixaSaqueFGTS[]
         {
             new FaixaSaqueFGTS { LimiteSuperior = 500, Aliquota = 0.5, ParcelaAdicional = 0 },
             new FaixaSaqueFGTS { LimiteSuperior = 1000, Aliquota = 0.4, ParcelaAdicional = 50 },
@@ -18,6 +19,35 @@ namespace CalculadoraCLT
             new FaixaSaqueFGTS { LimiteSuperior = 20000, Aliquota = 0.1, ParcelaAdicional = 1900 },
             new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
         };
+
+        public FGTS() { }
+
+        public FGTS(FaixaSaqueFGTS[] faixasSaque)
+        {
+            if (!faixasSaque?.Any() ?? true)
+                throw new ArgumentException("O valor especificado não pode ser nulo nem um array vazio.", nameof(faixasSaque));
+
+            if (faixasSaque.Any(f => f.LimiteSuperior <= 0))
+                throw new ArgumentOutOfRangeException(nameof(faixasSaque), $"O valor de {nameof(FaixaSaqueFGTS.LimiteSuperior)} não pode ser menor ou igual a zero");
+
+            if (faixasSaque.Any(f => f.Aliquota <= 0))
+                throw new ArgumentOutOfRangeException(nameof(faixasSaque), $"O valor de {nameof(FaixaSaqueFGTS.Aliquota)} não pode ser menor ou igual a zero");
+
+            if (faixasSaque.Any(f => f.ParcelaAdicional < 0))
+                throw new ArgumentOutOfRangeException(nameof(faixasSaque), $"O valor de {nameof(FaixaSaqueFGTS.ParcelaAdicional)} não pode ser menor que zero");
+
+            if (!LimiteSuperiorParcelaAdicionalOrdemCrescente(faixasSaque))
+            {
+                throw new ArgumentException($"Os valores de {nameof(FaixaSaqueFGTS.LimiteSuperior)} e {nameof(FaixaSaqueFGTS.ParcelaAdicional)} devem estar em ordem crescente.", nameof(faixasSaque));
+            }
+
+            if (!AliquotaOrdemDecrescente(faixasSaque))
+            {
+                throw new ArgumentException($"Os valores de {nameof(FaixaSaqueFGTS.Aliquota)} devem estar na ordem decrescente", nameof(faixasSaque));
+            }
+
+            _faixasSaque = faixasSaque;
+        }
 
         public double Calcular(double salario)
         {
@@ -32,14 +62,14 @@ namespace CalculadoraCLT
             if (saldoFgts < 0)
                 throw new ArgumentOutOfRangeException(nameof(saldoFgts), saldoFgts, "O parâmetro especificado não pode ser menor que zero.");
 
-            for (var i= 0; i < FaixasSaque.Length - 1; i++)
+            for (var i= 0; i < _faixasSaque.Length - 1; i++)
             {
-                if (saldoFgts <= FaixasSaque[i].LimiteSuperior)
+                if (saldoFgts <= _faixasSaque[i].LimiteSuperior)
                 {
-                    return saldoFgts * FaixasSaque[i].Aliquota + FaixasSaque[i].ParcelaAdicional;
+                    return saldoFgts * _faixasSaque[i].Aliquota + _faixasSaque[i].ParcelaAdicional;
                 }
             }
-            var ultimaFaixa = FaixasSaque.Last();
+            var ultimaFaixa = _faixasSaque.Last();
             return saldoFgts * ultimaFaixa.Aliquota + ultimaFaixa.ParcelaAdicional;
         }
 
@@ -86,6 +116,29 @@ namespace CalculadoraCLT
                 SaldoFinal = saldo,
                 Saques = saques
             };
+        }
+
+        private static bool LimiteSuperiorParcelaAdicionalOrdemCrescente(FaixaSaqueFGTS[] faixasSaque)
+        {
+            for (var i = 0; i < faixasSaque.Length - 1; i++)
+            {
+                if (faixasSaque[i].LimiteSuperior > faixasSaque[i + 1].LimiteSuperior)
+                    return false;
+
+                if (faixasSaque[i].ParcelaAdicional > faixasSaque[i + 1].ParcelaAdicional)
+                    return false;
+            }
+            return true;
+        }
+
+        private static bool AliquotaOrdemDecrescente(FaixaSaqueFGTS[] faixasSaque)
+        {
+            for (var i = 0; i < faixasSaque.Length - 1; i++)
+            {
+                if (faixasSaque[i].Aliquota < faixasSaque[i + 1].Aliquota)
+                    return false;
+            }
+            return true;
         }
     }
 }

@@ -62,5 +62,19 @@ namespace CalculadoraCLT.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>_fgts.PrevisaoSaques(saldoFgts, salarioMedio, mesInicio, mesAniversario, quantidadeAnos));
         }
+
+        [Theory]
+        [MemberData(nameof(FGTS_Deve_Lancar_ArgumentException), MemberType = typeof(FGTSTestData))]
+        public void FGTS_Deve_Lancar_ArgumentException(FaixaSaqueFGTS[] faixaSaqueFGTs)
+        {
+            Assert.Throws<ArgumentException>(() => new FGTS(faixaSaqueFGTs));
+        }
+
+        [Theory]
+        [MemberData(nameof(FGTS_Deve_Lancar_ArgumentOutOfRangeException), MemberType = typeof(FGTSTestData))]
+        public void FGTS_Deve_Lancar_ArgumentOutOfRangeException(FaixaSaqueFGTS[] faixaSaqueFGTs)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new FGTS(faixaSaqueFGTs));
+        }
     }
 }

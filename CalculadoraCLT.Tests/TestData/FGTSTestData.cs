@@ -77,5 +77,63 @@ namespace CalculadoraCLT.Tests.TestData
                 { 3000, 2000, 1, 12,  0},
             };
         }
+
+        public static TheoryData<FaixaSaqueFGTS[]> FGTS_Deve_Lancar_ArgumentException()
+        {
+            return new TheoryData<FaixaSaqueFGTS[]>
+            {
+                null,
+                new FaixaSaqueFGTS[] { },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 2000, Aliquota = 0.5, ParcelaAdicional = 0 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 1000, Aliquota = 0.4, ParcelaAdicional = 50 },
+                    new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 500, Aliquota = 0.5, ParcelaAdicional = 0 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 1000, Aliquota = 0.7, ParcelaAdicional = 50 },
+                    new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 10000, Aliquota = 0.2, ParcelaAdicional = 650 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 15000, Aliquota = 0.15, ParcelaAdicional = 3350 },
+                    new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 20000, Aliquota = 0.1, ParcelaAdicional = 1900 },
+                    new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 50000, Aliquota = 0.03, ParcelaAdicional = 3000 },
+                },
+            };
+        }
+
+        public static TheoryData<FaixaSaqueFGTS[]> FGTS_Deve_Lancar_ArgumentOutOfRangeException()
+        {
+            return new TheoryData<FaixaSaqueFGTS[]>
+            {
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = -5000, Aliquota = 0.1, ParcelaAdicional = 1900 },
+                    new FaixaSaqueFGTS { LimiteSuperior = -2500, Aliquota = 0.05, ParcelaAdicional = 2900 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 0, Aliquota = 0.03, ParcelaAdicional = 3000 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 500, Aliquota = 0, ParcelaAdicional = 0 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 1000, Aliquota = -0.2, ParcelaAdicional = 50 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 5000, Aliquota = -0.3, ParcelaAdicional = 150 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 500, Aliquota = 0.5, ParcelaAdicional = -500 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 1000, Aliquota = 0.4, ParcelaAdicional = -200 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 5000, Aliquota = 0.3, ParcelaAdicional = -100 },
+                },
+            };
+        }
     }
 }
