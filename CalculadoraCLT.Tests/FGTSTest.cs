@@ -64,17 +64,25 @@ namespace CalculadoraCLT.Tests
         }
 
         [Theory]
-        [MemberData(nameof(FGTS_Deve_Lancar_ArgumentException), MemberType = typeof(FGTSTestData))]
+        [MemberData(nameof(FGTSTestData.FGTS_Deve_Lancar_ArgumentException), MemberType = typeof(FGTSTestData))]
         public void FGTS_Deve_Lancar_ArgumentException(FaixaSaqueFGTS[] faixaSaqueFGTs)
         {
             Assert.Throws<ArgumentException>(() => new FGTS(faixaSaqueFGTs));
         }
 
         [Theory]
-        [MemberData(nameof(FGTS_Deve_Lancar_ArgumentOutOfRangeException), MemberType = typeof(FGTSTestData))]
+        [MemberData(nameof(FGTSTestData.FGTS_Deve_Lancar_ArgumentOutOfRangeException), MemberType = typeof(FGTSTestData))]
         public void FGTS_Deve_Lancar_ArgumentOutOfRangeException(FaixaSaqueFGTS[] faixaSaqueFGTs)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new FGTS(faixaSaqueFGTs));
+        }
+
+        [Theory]
+        [MemberData(nameof(FGTSTestData.FGTS_Nao_Deve_Lancar_Excecao), MemberType = typeof(FGTSTestData))]
+        public void FGTS_Nao_Deve_Lancar_Excecao(FaixaSaqueFGTS[] faixasSaqueFGTS)
+        {
+            var exception = Record.Exception(() => new FGTS(faixasSaqueFGTS));
+            Assert.Null(exception);
         }
     }
 }
