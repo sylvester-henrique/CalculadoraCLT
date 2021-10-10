@@ -1,4 +1,5 @@
 ﻿using CalculadoraCLT.Tests.TestData;
+using Moq;
 using System;
 using Xunit;
 
@@ -54,7 +55,13 @@ namespace CalculadoraCLT.Tests
         [InlineData(-789)]
         public void Total_Descontos_Deve_Lancar_ArgumentOutOfRangeException(double salarioBruto)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _salario.TotalDescontos(salarioBruto));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var inssMock = new Mock<IINSS>();
+                var irrfMock = new Mock<IIRRF>();
+                var salario = new Salario(inssMock.Object, irrfMock.Object);
+                salario.TotalDescontos(salarioBruto);
+            });
         }
     }
 }

@@ -36,7 +36,7 @@ namespace CalculadoraCLT.Tests.TestData
                 },
                 new FaixaSalarialIRRF[]
                 {
-                    new FaixaSalarialIRRF { LimiteSuperior = 7000, Aliquota = 0, Deducao = 200 },
+                    new FaixaSalarialIRRF { LimiteSuperior = 7000, Aliquota = 10, Deducao = 200 },
                     new FaixaSalarialIRRF { LimiteSuperior = 5000, Aliquota = 70, Deducao = 300 },
                     new FaixaSalarialIRRF { LimiteSuperior = double.MaxValue, Aliquota = 90, Deducao = 400 },
                 },
@@ -48,7 +48,7 @@ namespace CalculadoraCLT.Tests.TestData
                 },
                 new FaixaSalarialIRRF[]
                 {
-                    new FaixaSalarialIRRF { LimiteSuperior = 1000, Aliquota = 0, Deducao = 400 },
+                    new FaixaSalarialIRRF { LimiteSuperior = 1000, Aliquota = 24, Deducao = 400 },
                     new FaixaSalarialIRRF { LimiteSuperior = 4000, Aliquota = 70, Deducao = 300 },
                     new FaixaSalarialIRRF { LimiteSuperior = double.MaxValue, Aliquota = 90, Deducao = 100 },
                 },

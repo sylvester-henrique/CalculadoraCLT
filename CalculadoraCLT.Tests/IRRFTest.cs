@@ -1,5 +1,6 @@
 ﻿using CalculadoraCLT.Model;
 using CalculadoraCLT.Tests.TestData;
+using Moq;
 using System;
 using Xunit;
 
@@ -43,7 +44,8 @@ namespace CalculadoraCLT.Tests
         [MemberData(nameof(IRRFTestData.IRRF_Nao_Deve_Lancar_Excecao), MemberType = typeof(IRRFTestData))]
         public void IRRF_Nao_Deve_Lancar_Excecao(FaixaSalarialIRRF[] faixasSalariais)
         {
-            var exception = Record.Exception(() => new IRRF(faixasSalariais));
+            var inssMock = new Mock<IINSS>();
+            var exception = Record.Exception(() => new IRRF(inssMock.Object, faixasSalariais));
             Assert.Null(exception);
         }
     }
