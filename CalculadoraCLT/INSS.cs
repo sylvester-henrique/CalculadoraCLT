@@ -63,10 +63,10 @@ namespace CalculadoraCLT
 
             for (var i = 0; i < faixasSalariais.Length; i++)
             {
-                if (limiteSuperiorFaixaAnterior > faixasSalariais[i].LimiteSuperior)
+                if (limiteSuperiorFaixaAnterior >= faixasSalariais[i].LimiteSuperior)
                     return false;
 
-                if (aliquotaFaixaAnterior > faixasSalariais[i].Aliquota)
+                if (aliquotaFaixaAnterior >= faixasSalariais[i].Aliquota)
                     return false;
 
                 aliquotaFaixaAnterior = faixasSalariais[i].Aliquota;

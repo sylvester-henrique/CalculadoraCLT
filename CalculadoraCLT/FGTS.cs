@@ -122,10 +122,10 @@ namespace CalculadoraCLT
         {
             for (var i = 0; i < faixasSaque.Length - 1; i++)
             {
-                if (faixasSaque[i].LimiteSuperior > faixasSaque[i + 1].LimiteSuperior)
+                if (faixasSaque[i].LimiteSuperior >= faixasSaque[i + 1].LimiteSuperior)
                     return false;
 
-                if (faixasSaque[i].ParcelaAdicional > faixasSaque[i + 1].ParcelaAdicional)
+                if (faixasSaque[i].ParcelaAdicional >= faixasSaque[i + 1].ParcelaAdicional)
                     return false;
             }
             return true;
@@ -135,7 +135,7 @@ namespace CalculadoraCLT
         {
             for (var i = 0; i < faixasSaque.Length - 1; i++)
             {
-                if (faixasSaque[i].Aliquota < faixasSaque[i + 1].Aliquota)
+                if (faixasSaque[i].Aliquota <= faixasSaque[i + 1].Aliquota)
                     return false;
             }
             return true;

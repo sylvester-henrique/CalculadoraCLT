@@ -1,4 +1,5 @@
 ﻿using CalculadoraCLT.Model;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -23,7 +24,7 @@ namespace CalculadoraCLT.Tests.TestData
             return new TheoryData<FaixaSalarialINSS[]>
             {
                 null,
-                Enumerable.Empty<FaixaSalarialINSS>().ToArray(),
+                Array.Empty<FaixaSalarialINSS>(),
                 new FaixaSalarialINSS[]
                 {
                     new FaixaSalarialINSS { LimiteSuperior = 1000, Aliquota = 10 },
@@ -35,6 +36,16 @@ namespace CalculadoraCLT.Tests.TestData
                     new FaixaSalarialINSS { LimiteSuperior = 1750, Aliquota = 50 },
                     new FaixaSalarialINSS { LimiteSuperior = 2000, Aliquota = 15 },
                     new FaixaSalarialINSS { LimiteSuperior = 3300, Aliquota = 75 },
+                },
+                new FaixaSalarialINSS[]
+                {
+                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 50 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 75 },
+                },
+                new FaixaSalarialINSS[]
+                {
+                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 75 },
+                    new FaixaSalarialINSS { LimiteSuperior = 3500, Aliquota = 75 },
                 },
             };
         }

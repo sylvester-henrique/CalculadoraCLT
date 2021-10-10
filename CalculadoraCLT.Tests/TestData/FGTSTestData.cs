@@ -1,4 +1,5 @@
 ﻿using CalculadoraCLT.Model;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -83,7 +84,7 @@ namespace CalculadoraCLT.Tests.TestData
             return new TheoryData<FaixaSaqueFGTS[]>
             {
                 null,
-                new FaixaSaqueFGTS[] { },
+                Array.Empty<FaixaSaqueFGTS>(),
                 new FaixaSaqueFGTS[]
                 {
                     new FaixaSaqueFGTS { LimiteSuperior = 2000, Aliquota = 0.5, ParcelaAdicional = 0 },
@@ -107,6 +108,24 @@ namespace CalculadoraCLT.Tests.TestData
                     new FaixaSaqueFGTS { LimiteSuperior = 20000, Aliquota = 0.1, ParcelaAdicional = 1900 },
                     new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
                     new FaixaSaqueFGTS { LimiteSuperior = 50000, Aliquota = 0.03, ParcelaAdicional = 3000 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 5000, Aliquota = 0.2, ParcelaAdicional = 650 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 5000, Aliquota = 0.15, ParcelaAdicional = 2000 },
+                    new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 3000, Aliquota = 0.2, ParcelaAdicional = 650 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 7000, Aliquota = 0.2, ParcelaAdicional = 2000 },
+                    new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
+                },
+                new FaixaSaqueFGTS[]
+                {
+                    new FaixaSaqueFGTS { LimiteSuperior = 1000, Aliquota = 0.2, ParcelaAdicional = 850 },
+                    new FaixaSaqueFGTS { LimiteSuperior = 2000, Aliquota = 0.15, ParcelaAdicional = 850 },
+                    new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
                 },
             };
         }
