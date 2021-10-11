@@ -42,7 +42,7 @@ namespace CalculadoraCLT
         ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.LimiteSuperior"></see> é menor ou igual a zero.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.Aliquota"></see> é menor ou igual a zero.
+        ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.Aliquota"></see> não está entre 0 e 1.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.ParcelaAdicional"></see> é menor que zero.
@@ -56,8 +56,8 @@ namespace CalculadoraCLT
             if (faixasSaque.Any(f => f.LimiteSuperior <= 0))
                 throw new ArgumentOutOfRangeException(nameof(faixasSaque), $"O valor de {nameof(FaixaSaqueFGTS.LimiteSuperior)} não pode ser menor ou igual a zero");
 
-            if (faixasSaque.Any(f => f.Aliquota <= 0))
-                throw new ArgumentOutOfRangeException(nameof(faixasSaque), $"O valor de {nameof(FaixaSaqueFGTS.Aliquota)} não pode ser menor ou igual a zero");
+            if (faixasSaque.Any(f => f.Aliquota <= 0 || f.Aliquota > 1))
+                throw new ArgumentOutOfRangeException(nameof(faixasSaque), $"O valor de {nameof(FaixaSaqueFGTS.Aliquota)} deve ser maior que 0 e menor ou igual a 1.");
 
             if (faixasSaque.Any(f => f.ParcelaAdicional < 0))
                 throw new ArgumentOutOfRangeException(nameof(faixasSaque), $"O valor de {nameof(FaixaSaqueFGTS.ParcelaAdicional)} não pode ser menor que zero");

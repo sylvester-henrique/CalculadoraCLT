@@ -95,6 +95,8 @@ namespace CalculadoraCLT
 
             if (!FaixaSalarialOrdemCrescente(faixaSalariais))
                 throw new ArgumentException("Os valores das faixas salariais devem estar na ordem crescente.", nameof(faixaSalariais));
+
+            _faixaSalariais = faixaSalariais;
         }
 
         /// <inheritdoc/>
