@@ -33,16 +33,16 @@ namespace CalculadoraCLT
         ///     Lançada quando <paramref name="faixasSaque"></paramref> representa um valor nulo ou vazio.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     Lançada quando os valores de <see cref="FaixaSaqueFGTS.LimiteSuperior"></see> e <see cref="FaixaSaqueFGTS.ParcelaAdicional"></see> não estão em ordem crescente.
+        ///     Lançada quando os valores de <see cref="FaixaMonetaria.LimiteSuperior"></see> e <see cref="FaixaSaqueFGTS.ParcelaAdicional"></see> não estão em ordem crescente.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     Lançada quando os valores de <see cref="FaixaSaqueFGTS.Aliquota"></see> não estão em ordem decrescente.
+        ///     Lançada quando os valores de <see cref="FaixaMonetaria.Aliquota"></see> não estão em ordem decrescente.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.LimiteSuperior"></see> é menor ou igual a zero.
+        ///     Lançada quando algum valor de <see cref="FaixaMonetaria.LimiteSuperior"></see> é menor ou igual a zero.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.Aliquota"></see> não está entre 0 e 1.
+        ///     Lançada quando algum valor de <see cref="FaixaMonetaria.Aliquota"></see> não está entre 0 e 1.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.ParcelaAdicional"></see> é menor que zero.

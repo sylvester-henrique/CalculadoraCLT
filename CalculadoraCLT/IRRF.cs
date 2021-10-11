@@ -52,20 +52,13 @@ namespace CalculadoraCLT
         ///     Lançada quando <paramref name="faixaSalariais"></paramref> representa um valor nulo ou vazio.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     Lançada quando o valor de <see cref="FaixaSalarialIRRF.LimiteSuperior"></see> do último elemento de <paramref name="faixaSalariais"></paramref> não é igual a <see cref="double.MaxValue"></see>.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        ///     Lançada quando o valor de <see cref="FaixaSalarialIRRF.Aliquota"></see> for igual a zero mas o valor de
-        ///     <see cref="FaixaSalarialIRRF.Deducao"></see> não for igual a zero em um mesmo elemento de <paramref name="faixaSalariais"></paramref>.
-        /// </exception>
-        /// <exception cref="ArgumentException">
         ///     Lançada quando os valores de <paramref name="faixaSalariais"></paramref> não estão em ordem crescente.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.LimiteSuperior"></see> é menor ou igual a zero.
+        ///     Lançada quando algum valor de <see cref="FaixaMonetaria.LimiteSuperior"></see> é menor ou igual a zero.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.Aliquota"></see> não está entre 0 e 1.
+        ///     Lançada quando algum valor de <see cref="FaixaMonetaria.Aliquota"></see> não está entre 0 e 1.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.Deducao"></see> é menor que zero.
@@ -84,14 +77,6 @@ namespace CalculadoraCLT
 
             if (faixaSalariais.Any(f => f.Deducao < 0))
                 throw new ArgumentOutOfRangeException(nameof(faixaSalariais), $"O valor de {nameof(FaixaSalarialIRRF.Deducao)} não pode ser menor que zero.");
-
-            var ultimaFaixaSalarial = faixaSalariais.Last();
-            if (ultimaFaixaSalarial.LimiteSuperior != double.MaxValue)
-                throw new ArgumentException($"O valor de {nameof(FaixaSalarialIRRF.LimiteSuperior)} da última faixa salarial deve ser igual a {nameof(double.MaxValue)}.", nameof(faixaSalariais));
-
-            var primeiraFaixaSalarial = faixaSalariais.First();
-            if (primeiraFaixaSalarial.Aliquota == 0 && primeiraFaixaSalarial.Deducao != 0)
-                throw new ArgumentException($"Quando o valor de ${nameof(FaixaSalarialIRRF.Aliquota)} for igual a zero, o valor de {nameof(FaixaSalarialIRRF.Deducao)} também deve ser igual a zero.", nameof(faixaSalariais));
 
             if (!FaixaSalarialOrdemCrescente(faixaSalariais))
                 throw new ArgumentException("Os valores das faixas salariais devem estar na ordem crescente.", nameof(faixaSalariais));

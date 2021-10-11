@@ -29,13 +29,13 @@ namespace CalculadoraCLT
         ///     Lançada quando <paramref name="faixasSalariais"></paramref> representa um valor nulo ou vazio.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     Lançada quando os valores de <see cref="FaixaSalarialINSS.LimiteSuperior"></see> e <see cref="FaixaSalarialINSS.Aliquota"></see> não estão em ordem crescente.
+        ///     Lançada quando os valores de <see cref="FaixaMonetaria.LimiteSuperior"></see> e <see cref="FaixaMonetaria.Aliquota"></see> não estão em ordem crescente.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSalarialINSS.LimiteSuperior"></see> é menor ou igual a zero.
+        ///     Lançada quando algum valor de <see cref="FaixaMonetaria.LimiteSuperior"></see> é menor ou igual a zero.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSalarialINSS.Aliquota"></see> não está entre 0 e 1.
+        ///     Lançada quando algum valor de <see cref="FaixaMonetaria.Aliquota"></see> não está entre 0 e 1.
         /// </exception>
         /// <param name="faixasSalariais">Valores que indicam qual será o valor do INSS de acordo com o salário.</param>
         public INSS(FaixaSalarialINSS[] faixasSalariais)

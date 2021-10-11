@@ -26,16 +26,6 @@ namespace CalculadoraCLT.Tests.TestData
                 Array.Empty<FaixaSalarialIRRF>(),
                 new FaixaSalarialIRRF[]
                 {
-                    new FaixaSalarialIRRF { LimiteSuperior = 6000, Aliquota = 0.5, Deducao = 200 },
-                    new FaixaSalarialIRRF { LimiteSuperior = 7000, Aliquota = 0.9, Deducao = 500 },
-                },
-                new FaixaSalarialIRRF[]
-                {
-                    new FaixaSalarialIRRF { LimiteSuperior = 7000, Aliquota = 0, Deducao = 200 },
-                    new FaixaSalarialIRRF { LimiteSuperior = double.MaxValue, Aliquota = 0.9, Deducao = 300 },
-                },
-                new FaixaSalarialIRRF[]
-                {
                     new FaixaSalarialIRRF { LimiteSuperior = 7000, Aliquota = 0.1, Deducao = 200 },
                     new FaixaSalarialIRRF { LimiteSuperior = 5000, Aliquota = 0.7, Deducao = 300 },
                     new FaixaSalarialIRRF { LimiteSuperior = double.MaxValue, Aliquota = 0.9, Deducao = 400 },
