@@ -1,6 +1,5 @@
 ﻿using CalculadoraCLT.Model;
 using System;
-using System.Linq;
 using Xunit;
 
 namespace CalculadoraCLT.Tests.TestData
@@ -27,25 +26,25 @@ namespace CalculadoraCLT.Tests.TestData
                 Array.Empty<FaixaSalarialINSS>(),
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1000, Aliquota = 10 },
-                    new FaixaSalarialINSS { LimiteSuperior = 500, Aliquota = 15 },
-                    new FaixaSalarialINSS { LimiteSuperior = 400, Aliquota = 20 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1000, Aliquota = 0.1 },
+                    new FaixaSalarialINSS { LimiteSuperior = 500, Aliquota = 0.15 },
+                    new FaixaSalarialINSS { LimiteSuperior = 400, Aliquota = 0.2 },
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1750, Aliquota = 50 },
-                    new FaixaSalarialINSS { LimiteSuperior = 2000, Aliquota = 15 },
-                    new FaixaSalarialINSS { LimiteSuperior = 3300, Aliquota = 75 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1750, Aliquota = 0.5 },
+                    new FaixaSalarialINSS { LimiteSuperior = 2000, Aliquota = 0.15 },
+                    new FaixaSalarialINSS { LimiteSuperior = 3300, Aliquota = 0.75 },
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 50 },
-                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 75 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 0.5 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 0.75 },
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 75 },
-                    new FaixaSalarialINSS { LimiteSuperior = 3500, Aliquota = 75 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1950, Aliquota = 0.75 },
+                    new FaixaSalarialINSS { LimiteSuperior = 3500, Aliquota = 0.75 },
                 },
             };
         }
@@ -56,15 +55,15 @@ namespace CalculadoraCLT.Tests.TestData
             {
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 0, Aliquota = 10 }
+                    new FaixaSalarialINSS { LimiteSuperior = 0, Aliquota = 0.1 }
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = -5, Aliquota = 10 }
+                    new FaixaSalarialINSS { LimiteSuperior = -5, Aliquota = 0.1 }
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 3500, Aliquota = -55 }
+                    new FaixaSalarialINSS { LimiteSuperior = 3500, Aliquota = -0.55 }
                 },
                 new FaixaSalarialINSS[]
                 {
@@ -72,7 +71,7 @@ namespace CalculadoraCLT.Tests.TestData
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 3500, Aliquota = 120 }
+                    new FaixaSalarialINSS { LimiteSuperior = 3500, Aliquota = 1.2 }
                 },
             };
         }
@@ -83,25 +82,25 @@ namespace CalculadoraCLT.Tests.TestData
             {
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1000, Aliquota = 10 }
+                    new FaixaSalarialINSS { LimiteSuperior = 1000, Aliquota = 0.1 }
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1250.43, Aliquota = 10 },
-                    new FaixaSalarialINSS { LimiteSuperior = 2350.94, Aliquota = 15 },
-                    new FaixaSalarialINSS { LimiteSuperior = 3800.12, Aliquota = 20 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1250.43, Aliquota = 0.1 },
+                    new FaixaSalarialINSS { LimiteSuperior = 2350.94, Aliquota = 0.15 },
+                    new FaixaSalarialINSS { LimiteSuperior = 3800.12, Aliquota = 0.2 },
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1750, Aliquota = 55.60 },
-                    new FaixaSalarialINSS { LimiteSuperior = 2000, Aliquota = 68.99 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1750, Aliquota = 0.556 },
+                    new FaixaSalarialINSS { LimiteSuperior = 2000, Aliquota = 0.6899 },
                 },
                 new FaixaSalarialINSS[]
                 {
-                    new FaixaSalarialINSS { LimiteSuperior = 1100.00, Aliquota =  7.5 },
-                    new FaixaSalarialINSS { LimiteSuperior = 2203.48, Aliquota =  9.0 },
-                    new FaixaSalarialINSS { LimiteSuperior = 3305.23, Aliquota = 12.00 },
-                    new FaixaSalarialINSS { LimiteSuperior = 6433.57, Aliquota = 14.00 },
+                    new FaixaSalarialINSS { LimiteSuperior = 1100.00, Aliquota =  0.075 },
+                    new FaixaSalarialINSS { LimiteSuperior = 2203.48, Aliquota =  0.09 },
+                    new FaixaSalarialINSS { LimiteSuperior = 3305.23, Aliquota = 0.12 },
+                    new FaixaSalarialINSS { LimiteSuperior = 6433.57, Aliquota = 0.14 },
                 }
             };
         }

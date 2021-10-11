@@ -12,10 +12,10 @@ namespace CalculadoraCLT
         private readonly FaixaSalarialIRRF[] _faixaSalariais = new FaixaSalarialIRRF[]
         {
             new FaixaSalarialIRRF { LimiteSuperior = 1903.98, Aliquota =  0.0, Deducao = 0.0 },
-            new FaixaSalarialIRRF { LimiteSuperior = 2826.65, Aliquota =  7.5, Deducao = 142.80 },
-            new FaixaSalarialIRRF { LimiteSuperior = 3751.05, Aliquota = 15.0, Deducao = 354.80 },
-            new FaixaSalarialIRRF { LimiteSuperior = 4664.68, Aliquota = 22.5, Deducao = 636.13 },
-            new FaixaSalarialIRRF { LimiteSuperior = double.MaxValue, Aliquota = 27.5, Deducao = 869.36 },
+            new FaixaSalarialIRRF { LimiteSuperior = 2826.65, Aliquota =  0.075, Deducao = 142.80 },
+            new FaixaSalarialIRRF { LimiteSuperior = 3751.05, Aliquota = 0.15, Deducao = 354.80 },
+            new FaixaSalarialIRRF { LimiteSuperior = 4664.68, Aliquota = 0.225, Deducao = 636.13 },
+            new FaixaSalarialIRRF { LimiteSuperior = double.MaxValue, Aliquota = 0.275, Deducao = 869.36 },
         };
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace CalculadoraCLT
         ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.LimiteSuperior"></see> é menor ou igual a zero.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.Aliquota"></see> não está entre 0 e 100.
+        ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.Aliquota"></see> não está entre 0 e 1.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.Deducao"></see> é menor que zero.
@@ -79,8 +79,8 @@ namespace CalculadoraCLT
             if (faixaSalariais.Any(f => f.LimiteSuperior <= 0))
                 throw new ArgumentOutOfRangeException(nameof(faixaSalariais), $"O valor de {nameof(FaixaSalarialIRRF.LimiteSuperior)} não pode ser menor ou igual a zero.");
 
-            if (faixaSalariais.Any(f => f.Aliquota < 0 || f.Aliquota > 100))
-                throw new ArgumentOutOfRangeException(nameof(faixaSalariais), $"O valor de {nameof(FaixaSalarialIRRF.Aliquota)} deve ser maior que zero e menor que 100");
+            if (faixaSalariais.Any(f => f.Aliquota < 0 || f.Aliquota > 1))
+                throw new ArgumentOutOfRangeException(nameof(faixaSalariais), $"O valor de {nameof(FaixaSalarialIRRF.Aliquota)} deve ser maior que zero e menor ou igual a 1");
 
             if (faixaSalariais.Any(f => f.Deducao < 0))
                 throw new ArgumentOutOfRangeException(nameof(faixaSalariais), $"O valor de {nameof(FaixaSalarialIRRF.Deducao)} não pode ser menor que zero.");
@@ -113,10 +113,10 @@ namespace CalculadoraCLT
             for (var i = 0; i < _faixaSalariais.Length - 1; i++)
             {
                 if (baseCalculo < _faixaSalariais[i].LimiteSuperior)
-                    return baseCalculo * (_faixaSalariais[i].Aliquota / 100) - _faixaSalariais[i].Deducao;
+                    return baseCalculo * _faixaSalariais[i].Aliquota - _faixaSalariais[i].Deducao;
             }
             var ultimaFaixaSalarial = _faixaSalariais.Last();
-            return baseCalculo * (ultimaFaixaSalarial.Aliquota / 100) - ultimaFaixaSalarial.Deducao;
+            return baseCalculo * ultimaFaixaSalarial.Aliquota - ultimaFaixaSalarial.Deducao;
         }
 
         private static bool FaixaSalarialOrdemCrescente(FaixaSalarialIRRF[] faixaSalariais)
