@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace CalculadoraCLT
 {
+    /// <inheritdoc/>
     public class INSS : IINSS
     {
         private const int NumeroCasasDecimais = 2;
@@ -16,8 +17,27 @@ namespace CalculadoraCLT
             new FaixaSalarialINSS { LimiteSuperior = 6433.57, Aliquota = 14.00 }
         };
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="INSS"></see>.
+        /// </summary>
         public INSS() { }
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="INSS"></see>.
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando <paramref name="faixasSalariais"></paramref> representa um valor nulo ou vazio.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando os valores de <see cref="FaixaSalarialINSS.LimiteSuperior"></see> e <see cref="FaixaSalarialINSS.Aliquota"></see> não estão em ordem crescente.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSalarialINSS.LimiteSuperior"></see> é menor ou igual a zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSalarialINSS.Aliquota"></see> não está entre 1 e 100.
+        /// </exception>
+        /// <param name="faixasSalariais">Valores que indicam qual será o valor do INSS de acordo com o salário.</param>
         public INSS(FaixaSalarialINSS[] faixasSalariais)
         {
             if (!faixasSalariais?.Any() ?? true)
@@ -35,6 +55,10 @@ namespace CalculadoraCLT
             _faixasSalariais = faixasSalariais;
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="salarioBruto"></paramref> representa um valor menor ou igual a zero.
+        /// </exception>
         public double Calcular(double salarioBruto)
         {
             if (salarioBruto <= 0)

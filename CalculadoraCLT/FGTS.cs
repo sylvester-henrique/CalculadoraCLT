@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace CalculadoraCLT
 {
+    /// <inheritdoc/>
     public class FGTS : IFGTS
     {
         private const double TaxaFgts = 0.08;
@@ -20,8 +21,33 @@ namespace CalculadoraCLT
             new FaixaSaqueFGTS { LimiteSuperior = double.MaxValue, Aliquota = 0.05, ParcelaAdicional = 2900 },
         };
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="FGTS"></see>.
+        /// </summary>
         public FGTS() { }
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="FGTS"></see>.
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando <paramref name="faixasSaque"></paramref> representa um valor nulo ou vazio.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando os valores de <see cref="FaixaSaqueFGTS.LimiteSuperior"></see> e <see cref="FaixaSaqueFGTS.ParcelaAdicional"></see> não estão em ordem crescente.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando os valores de <see cref="FaixaSaqueFGTS.Aliquota"></see> não estão em ordem decrescente.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.LimiteSuperior"></see> é menor ou igual a zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.Aliquota"></see> é menor ou igual a zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSaqueFGTS.ParcelaAdicional"></see> é menor que zero.
+        /// </exception>
+        /// <param name="faixasSaque">Valores que indicam quanto poderá ser sacado do FGTS.</param>
         public FGTS(FaixaSaqueFGTS[] faixasSaque)
         {
             if (!faixasSaque?.Any() ?? true)
@@ -49,6 +75,10 @@ namespace CalculadoraCLT
             _faixasSaque = faixasSaque;
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="salario"></paramref> representa um valor menor ou igual a zero.
+        /// </exception>
         public double Calcular(double salario)
         {
             if (salario <= 0)
@@ -57,6 +87,10 @@ namespace CalculadoraCLT
             return salario * TaxaFgts;
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="saldoFgts"></paramref> representa um valor menor que zero.
+        /// </exception>
         public double SaqueAniversario(double saldoFgts)
         {
             if (saldoFgts < 0)
@@ -73,6 +107,22 @@ namespace CalculadoraCLT
             return saldoFgts * ultimaFaixa.Aliquota + ultimaFaixa.ParcelaAdicional;
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="saldoFgts"></paramref> representa um valor menor que zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="salarioMedio"></paramref> representa um valor menor ou igual a zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="quantidadeAnos"></paramref> representa um valor menor ou igual a zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="mesInicio"></paramref> representa um valor que não está entre 1 e 12.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="mesAniversario"></paramref> representa um valor que não está entre 1 e 12.
+        /// </exception>
         public PrevisaoFGTS PrevisaoSaques(double saldoFgts, double salarioMedio, int mesInicio, int mesAniversario, int quantidadeAnos)
         {
             if (saldoFgts < 0)

@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace CalculadoraCLT
 {
+    /// <inheritdoc/>
     public class IRRF : IIRRF
     {
         private readonly IINSS _inss;
@@ -17,21 +18,59 @@ namespace CalculadoraCLT
             new FaixaSalarialIRRF { LimiteSuperior = double.MaxValue, Aliquota = 27.5, Deducao = 869.36 },
         };
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="IRRF"></see>.
+        /// </summary>
         public IRRF()
         {
             _inss = new INSS();
         }
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="IRRF"></see>.
+        /// </summary>
+        /// <param name="inss">Um <see cref="IINSS"></see> que será usado no cálculo de FGTS.</param>
         public IRRF(IINSS inss)
         {
             _inss = inss;
         }
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="IRRF"></see>.
+        /// </summary>
+        /// <param name="inss">Um <see cref="IINSS"></see> que será usado no cálculo de IRRF.</param>
+        /// <param name="faixaSalariais">Valores que serão utilizados no cálculo de IRRF.</param>
         public IRRF(IINSS inss, FaixaSalarialIRRF[] faixaSalariais) : this(faixaSalariais)
         {
             _inss = inss;
         }
 
+        /// <summary>
+        /// Inicializa uma nova instância de <see cref="IRRF"></see>.
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando <paramref name="faixaSalariais"></paramref> representa um valor nulo ou vazio.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando o valor de <see cref="FaixaSalarialIRRF.LimiteSuperior"></see> do último elemento de <paramref name="faixaSalariais"></paramref> não é igual a <see cref="double.MaxValue"></see>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando o valor de <see cref="FaixaSalarialIRRF.Aliquota"></see> for igual a zero mas o valor de
+        ///     <see cref="FaixaSalarialIRRF.Deducao"></see> não for igual a zero em um mesmo elemento de <paramref name="faixaSalariais"></paramref>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     Lançada quando os valores de <paramref name="faixaSalariais"></paramref> não estão em ordem crescente.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.LimiteSuperior"></see> é menor ou igual a zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.Aliquota"></see> não está entre 0 e 100.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando algum valor de <see cref="FaixaSalarialIRRF.Deducao"></see> é menor que zero.
+        /// </exception>
+        /// <param name="faixaSalariais">Valores que serão utilizados no cálculo de IRRF.</param>
         public IRRF(FaixaSalarialIRRF[] faixaSalariais)
         {
             if (!faixaSalariais?.Any() ?? true)
@@ -58,6 +97,10 @@ namespace CalculadoraCLT
                 throw new ArgumentException("Os valores das faixas salariais devem estar na ordem crescente.", nameof(faixaSalariais));
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Lançada quando <paramref name="salarioBruto"></paramref> representa um valor menor ou igual a zero.
+        /// </exception>
         public double Calcular(double salarioBruto)
         {
             if (salarioBruto <= 0)
