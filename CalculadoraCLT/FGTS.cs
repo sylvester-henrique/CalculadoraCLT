@@ -108,6 +108,11 @@ namespace CalculadoraCLT
         }
 
         /// <inheritdoc/>
+        /// <remarks>
+        /// Nesse cálculo, é considerado que o depósito do FGTS de um mês sempre será feito antes do saque (quando for o mês de saque).<br/>
+        /// Por exemplo, quando o <paramref name="mesAniversario"/> for igual ao <paramref name="mesInicio"/>, o valor do FGTS do mês será somado ao valor que está na <br/>
+        /// conta do FGTS e em seguida será feito o cálculo do saque.
+        /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Lançada quando <paramref name="saldoFgts"></paramref> representa um valor menor que zero.
         /// </exception>
