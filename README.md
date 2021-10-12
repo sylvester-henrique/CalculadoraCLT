@@ -13,7 +13,58 @@ A biblioteca atualmente possui as funcionalidades:
   - cálculo do valor do saque aniversário a partir do saldo do FGTS
   - cálculo de previsões dos próximos saques aniversário do FGTS
   
-  
+# Exemplos 
+Todas as classes da blibliotaca possuem um construtor padrão, que não tem nenhum parâmetro. Caso a classe seja instanciada com o construtor padrão, os cálculos realizados vão considerar as regras da CLT vigentes no ano de 2021.
+As classes também suportam configurações personalizadas (passadas pelo construtor) que serão detalhadas a seguir.
+
+## FGTS
+Para fazer cálculo de saque aniversário e cálculo de valor do FGTS do mês de acordo com a regra de 2021, basta utilizar o construtor padrão:
+```cs
+var fgts = new FGTS();
+var fgtsMes = fgts.Calcular(salario: 10000);
+var saque = fgts.SaqueAniversario(saldoFgts: 30000);
+```
+Também é possível fazer o cálculo de futuros saques do FGTS segundo a regra do Saque Aniversário. Esse exemplo, calcula a previsão dos valores de saque do FGTS nos próximos 10 anos, considerando um salário médio no período:
+
+```cs
+var previsaoSaque = fgts.PrevisaoSaques(
+    saldoFgts: 30000,
+    salarioMedio: 10000,
+    mesInicio: DateTime.Now.Month,
+    mesAniversario: 4,
+    quantidadeAnos: 10
+);
+Console.WriteLine("Previsão dos saques do FGTS:");
+foreach (var s in previsaoSaque.Saques)
+{
+    Console.WriteLine($"Valor do saque: {s}");
+}
+Console.WriteLine($"Saldo final: {previsaoSaque.SaldoFinal}");
+```
+É possiver difinir limites para saque do FGTS diferentes dos limites definidos em 2021:
+```cs
+var faixasSaqueFgts = new FaixaSaqueFGTS[]
+{
+    new FaixaSaqueFGTS { LimiteSuperior = 600, Aliquota = 0.75, ParcelaAdicional = 0 },
+    new FaixaSaqueFGTS { LimiteSuperior = 1050, Aliquota = 0.55, ParcelaAdicional = 500 },
+    new FaixaSaqueFGTS { LimiteSuperior = 4500, Aliquota = 0.3, ParcelaAdicional = 750 },
+};
+var fgts = new FGTS(faixasSaqueFgts);
+```
+**OBS:** As classes de cálculo de INSS e IRRF também possuem construtores que aceitam configurações diferentes para a realização de seus respectivos cálculos.
+## Salario
+É possível calcular o salário líquido a partir do salário bruto.
+```cs
+var salario = new Salario();
+var salarioLiquido = salario.SalarioLiquido(13000);
+```
+ Também é possível instanciar ```Salario``` passando como parâmetro, diferentes implementações de ```IINSS``` e ```IIRRF```:
+```cs
+IINSS inss = new MinhaImplementacaoDeINSS();
+IIRRF irrf = new MinhaImplementacaoDeIRRF();
+var salario = new Salario(inss, irrf);
+```
+
  # Inspiração
  Inicialmente essa biblioteca foi criada com objetivo de praticar e aplicar conhecimentos de TDD, testes unitários e princípios SOLID.
  
