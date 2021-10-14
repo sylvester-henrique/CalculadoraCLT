@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageId>CalculadoraCLT</PackageId>
     <Authors>Sylvester Henrique</Authors>
     <Description>Contém funcionalidades de cálculos relacionados à CLT(Consolidação de Leis de Trabalho) brasileira.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
